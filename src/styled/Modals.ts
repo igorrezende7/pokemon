@@ -47,7 +47,7 @@ width: 25rem;
 height: 400px;
 position: relative;
 z-index: 999;
-top: 4rem;
+/* top: 4rem; */
 
 animation: ${props => props.open ? "modalOpen .2s linear forwards" : ""};
 

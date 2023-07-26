@@ -28,15 +28,15 @@ const ModalPokemons = ({ open, changeModal, pokemon }: ModalProps) => {
                 <IoMdClose onClick={() => changeModal()} />
               </CloseModal>
               <CardImage>
-                <CardOverAll>{pokemon[0].data.base_experience}</CardOverAll>
-                <img src={pokemon[0].data.sprites.front_default} alt="" />
+                <CardOverAll>{pokemon.data.base_experience}</CardOverAll>
+                <img src={pokemon.data.sprites.front_default} alt="" />
               </CardImage>
               <CardTitle>
-                {pokemon[0].data.name.charAt(0).toUpperCase() +
-                  pokemon[0].data.name.slice(1)}
+                {pokemon.data.name.charAt(0).toUpperCase() +
+                  pokemon.data.name.slice(1)}
               </CardTitle>
 
-              <Stats pokemon={pokemon[0]}></Stats>
+              <Stats pokemon={pokemon}></Stats>
             </Card>
           </ModalContent>
         </Modal>
