@@ -5,15 +5,17 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Col, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ModalPokemons from "../ModalPokemons/ModalPokemons";
 import Skeleton from "../Skeleton/Skeleton";
 import axios from "axios";
+import PokemonsActionTypes from "../../redux/pokemons/pokemonsActionType";
 const url = process.env.REACT_APP_URL_API
 
 const NavBar = () => {
+  const dispatch = useDispatch()
   const {count} = useSelector((root:any)=> root.pokemonsReducer)
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -31,6 +33,10 @@ const NavBar = () => {
   async function GetAllPokemons(){
     let response = await axios.get(`${url}/pokemon/?limit=${count}`)
     let data = response.data
+    dispatch({
+      type:PokemonsActionTypes.addAll,
+      payload:data
+    })
     return response
   }
 
@@ -68,7 +74,7 @@ const NavBar = () => {
        ></ModalPokemons>
     <Nav>
       <ImgNav
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/dados")}
         src={pokemonImg}
       ></ImgNav>
     
