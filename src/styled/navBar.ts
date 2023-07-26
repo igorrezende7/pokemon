@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Nav = styled.div`
   width: 100%;
   height: auto;
-  background-color: #ccc;
+  background-color: #373737;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,6 +16,13 @@ export const Nav = styled.div`
     align-items: center;
     justify-content: center;
     gap: 1rem;
+  }
+
+  label,input,svg{
+    color: #f2f2f2;
+  }
+  fieldset{
+    border-color: #f2f2f2;
   }
 `
 

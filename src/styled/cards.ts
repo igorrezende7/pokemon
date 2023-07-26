@@ -14,6 +14,7 @@ export const Card = styled.div`
   border-radius: 5px;
   transition: .3s;
   cursor: pointer;
+  flex: 1;
   /* &:hover{
     transform: scale(1.05);
   } */

@@ -14,7 +14,6 @@ interface PokemonProps {
   getPokemon: any;
 }
 const CardPokemons = ({ pokemons, changeModal, getPokemon }: PokemonProps) => {
-  console.log(pokemons);
   const navigate = useNavigate();
 
   function handlePokemon(id: number) {
@@ -27,7 +26,7 @@ const CardPokemons = ({ pokemons, changeModal, getPokemon }: PokemonProps) => {
       <Container>
         <Row className="justify-content-md-start justify-content-center">
           {pokemons.map((pokemon: any, key: number) => (
-            <Col lg={3} md={6} xs={10}>
+            <Col lg={3} md={6} xs={10} className="d-flex">
               <Card>
                 <CardImage>
                   <CardOverAll>{pokemon.data.base_experience}</CardOverAll>

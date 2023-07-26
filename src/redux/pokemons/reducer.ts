@@ -3,7 +3,11 @@ import PokemonsActionTypes from "./pokemonsActionType"
 const initalState = {
   pokemons: null,
   count:null,
-  allPokemons:null
+  allPokemons:null,
+  tipos:null,
+  maiorPeso:null,
+  maiorAltura:null,
+  maisForte:null,
 }
 
 const pokemonsReducer = (state = initalState, action:any)=>{
@@ -17,7 +21,12 @@ const pokemonsReducer = (state = initalState, action:any)=>{
     case PokemonsActionTypes.addAll:
       return {...state, allPokemons:response}
   }
-  return state
+
+  switch(action.type){
+    case PokemonsActionTypes.addFiltros:
+      return {...state, tipos:response.tipos, maiorPeso:response.maiorPeso, maiorAltura:response.maiorAltura, maisForte:response.maisForte}
+  }
+  return {...state}
 }
 
 export default pokemonsReducer
