@@ -74,7 +74,7 @@ const NavBar = () => {
        ></ModalPokemons>
     <Nav>
       <ImgNav
-        onClick={() => navigate("/dados")}
+        onClick={() => navigate("/")}
         src={pokemonImg}
       ></ImgNav>
     
