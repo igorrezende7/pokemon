@@ -12,37 +12,17 @@ const DadosScreen = () => {
   const [skeleton, setSkeleton] = useState<boolean>(false);
   const {allPokemons, count } = useSelector((root:any)=> root.pokemonsReducer)
   const [data, setData] = useState<any>("")
-
+console.log("Count: ", count)
   useEffect(()=>{
     if(allPokemons == null || count ==null)
     return 
-    reducePokemons().then((res:any)=>{
-      setSkeleton(false)
-      setData(res)
-    })
+
+
   },[allPokemons])
 
-  async function reducePokemons(){
-    setSkeleton(true)
-    var result = allPokemons.results;
-    let urls=[];
-    for(let i = 0; i<count; i++){
-      urls.push(result[i].url)
-    }
-    let allParams = getAllParams(urls)
-
-    return allParams
-  }
+ 
   
 
-  async function getAllParams(urls:any){
-    try {
-      let response = await axios.all(urls.map((url:string)=>axios.get(url)))
-    return response
-    } catch (error) {
-      console.log(error)
-    }
-  }
   return (
     
         

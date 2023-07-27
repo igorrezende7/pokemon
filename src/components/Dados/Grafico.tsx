@@ -17,9 +17,25 @@ const Grafico = ({data}:any) => {
     if(data == undefined || data ==null)
     return
 
-    console.log(data)
+    if (data !== null && data !==null){
+      fiterData()
+    }
+    
   },[data])
-console.log(data)
+
+  function fiterData(){
+    const result = data.reduce((accumulator:any , current:any )=>{
+      var tipo = current.data.types[0].type.name
+      // console.log(accumulator)
+      // const existe = accumulator.find((item:any) => item.tipo === tipo);
+      // if(existe){
+
+      // }
+    })
+  }
+
+
+
   return (
     <>
       <h1>Olá</h1>

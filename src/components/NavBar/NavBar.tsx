@@ -24,28 +24,14 @@ const NavBar = () => {
   const [pokemon, setPokemon] = useState<any>("");
   const [pokemons, setPokemons] = useState<any>(false);
   const [skeleton, setSkeleton] = useState<boolean>(false);
-
   useEffect(() => {
-    try {
-      GetAllPokemons().then((res) => {
-        setPokemons(res.data.results);
-        setSkeleton(false);
-      });
-    } catch (error) {
-      console.log(error);
-      setSkeleton(false);
-    }
-  }, []);
+    if(allPokemons == null || allPokemons== undefined)
+    return
+    console.log(allPokemons)
+    setPokemons(allPokemons.results)
 
-  async function GetAllPokemons() {
-    let response = await axios.get(`${url}/pokemon/?limit=${count}`);
-    let data = response.data;
-    dispatch({
-      type: PokemonsActionTypes.addAll,
-      payload: data,
-    });
-    return response;
-  }
+  }, [allPokemons]);
+
 
 
 

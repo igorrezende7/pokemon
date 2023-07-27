@@ -42,7 +42,6 @@ const Stats = ({ pokemon }: StatsProps) => {
     });
     var obj = Object.entries(values);
     // setObjPokemon(obj);
-    console.log(Object.entries(values));
   }
 
   useEffect(() => {

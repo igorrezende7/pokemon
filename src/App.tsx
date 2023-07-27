@@ -16,8 +16,26 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getPokemos();
+    console.log("chamada")
+    getPokemos().then((res)=>{
+      console.log()
+    GetAllPokemons(res)
+    })
   }, []);
+
+  async function GetAllPokemons(contagem:number) {
+    console.log("CountApp:", count)
+    contagem = Math.ceil(contagem / 3)
+    let response = await axios.get(`${url}/pokemon/?limit=${contagem}`);
+    let data = response.data;
+    dispatch({
+      type: PokemonsActionTypes.addAll,
+      payload: data,
+    });
+    return response;
+  }
+
+
 
   //Função que retorna um array com todos os nossos pokemons
   async function getPokemos() {
@@ -40,6 +58,7 @@ function App() {
         count,
       },
     });
+    return count
   }
 
   async function filterPokemons(pagina: number) {
