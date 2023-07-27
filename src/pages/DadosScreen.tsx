@@ -5,35 +5,50 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Shadow } from "./styled";
 import Grafico from "../components/Dados/Grafico";
+import axios, { all } from "axios";
 
 const DadosScreen = () => {
   const navigate = useNavigate();
   const [skeleton, setSkeleton] = useState<boolean>(false);
-  const { allPokemons, tipos, maiorPeso, maiorAltura, maisForte, count } =
-    useSelector((root: any) => root.pokemonsReducer);
+  const {allPokemons, count } = useSelector((root:any)=> root.pokemonsReducer)
+  const [data, setData] = useState("")
 
-  useEffect(() => {
-    setSkeleton(true);
-    if (allPokemons == null || count == null) {
-      navigate("/");
-    } else {
-      setSkeleton(false);
+  useEffect(()=>{
+    if(allPokemons == null || count ==null)
+    return 
+    reducePokemons().then((res:any)=>{
+      setSkeleton(false)
+      setData(res)
+    })
+  },[allPokemons])
+
+  async function reducePokemons(){
+    setSkeleton(true)
+    var result = allPokemons.results;
+    let urls=[];
+    for(let i = 0; i<count; i++){
+      urls.push(result[i].url)
     }
-  }, []);
+    let allParams = getAllParams(urls)
+
+    return allParams
+  }
+  
+
+  async function getAllParams(urls:any){
+    let response = await axios.all(urls.map((url:any)=>axios.get(url)))
+    return response
+  }
   return (
-    <>
-      {allPokemons ? (
+    
         <>
           <Skeleton open={skeleton} />
           <NavBar />
           <Shadow>
-            <Grafico></Grafico>
+            <Grafico data={data}></Grafico>
           </Shadow>
         </>
-      ) : (
-        <Skeleton open={true} />
-      )}
-    </>
+    
   );
 };
 

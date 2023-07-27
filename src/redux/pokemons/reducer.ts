@@ -4,10 +4,6 @@ const initalState = {
   pokemons: null,
   count:null,
   allPokemons:null,
-  tipos:null,
-  maiorPeso:null,
-  maiorAltura:null,
-  maisForte:null,
 }
 
 const pokemonsReducer = (state = initalState, action:any)=>{
@@ -22,10 +18,6 @@ const pokemonsReducer = (state = initalState, action:any)=>{
       return {...state, allPokemons:response}
   }
 
-  switch(action.type){
-    case PokemonsActionTypes.addFiltros:
-      return {...state, tipos:response.tipos, maiorPeso:response.maiorPeso, maiorAltura:response.maiorAltura, maisForte:response.maisForte}
-  }
   return {...state}
 }
 

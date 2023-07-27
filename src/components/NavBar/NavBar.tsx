@@ -40,84 +40,17 @@ const NavBar = () => {
   async function GetAllPokemons() {
     let response = await axios.get(`${url}/pokemon/?limit=${count}`);
     let data = response.data;
-    console.log(data);
     dispatch({
       type: PokemonsActionTypes.addAll,
       payload: data,
     });
-    filterData(data);
     return response;
   }
 
-  async function filterData(data: any) {
-    let urls = [];
-    for (var i = 0; i < count; i++) {
-      urls.push(data.results[i].url);
-    }
-    try {
-      await axios.all(urls.map((url) => axios.get(url))).then((res: any) => {
-        loopData(res);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
-  async function loopData(data: any) {
-    var maiorPeso = { valor: 0, nome: "" };
-    var maiorAltura = { valor: 0, nome: "" };
-    var maisForte = { valor: 0, nome: "" };
-    var pokemons = data;
-    var unicoArray = new Set();
-    var tipos = tipoPokemon(data);
-
-    for (var i = 0; i < count; i++) {
-      // var tipo = pokemons[i].data.types[0].type.name;
-
-      var peso = pokemons[i].data.weight;
-      var altura = pokemons[i].data.height;
-      var forte = pokemons[i].data.base_experience;
-      var nome = pokemons[i].data.name;
-      var resultado = data.reduce((acumulator: any, current: any) => {
-        // console.log("Current: ", current);
-      });
-
-      if (peso > maiorPeso.valor) {
-        maiorPeso.valor = peso;
-        maiorPeso.nome = nome;
-      }
-      if (altura > maiorAltura.valor) {
-        maiorAltura.valor = altura;
-        maiorAltura.nome = nome;
-      }
-      if (forte > maisForte.valor) {
-        maisForte.nome = nome;
-        maisForte.valor = forte;
-      }
-    }
-    dispatch({
-      type: PokemonsActionTypes.addFiltros,
-      payload: { maiorPeso, maiorAltura, tipos, maisForte },
-    });
-  }
-
-  function tipoPokemon(data: any) {
-    const resultado = data.reduce((accumulator: any, current: any) => {
-      var tipo = current.data.types[0].type.name;
-      const existe = accumulator.find((item: any) => item.tipo === tipo);
-      if (existe) {
-        existe.contador++;
-      } else {
-        accumulator.push({ tipo: tipo, contador: 1 });
-      }
-      return accumulator;
-    }, []);
-    return resultado;
-  }
 
   function changeModal() {
     setModalOpen(!modalOpen);
-    console.log(modalOpen);
   }
 
   async function changePokemon(name: string) {
@@ -128,7 +61,6 @@ const NavBar = () => {
     }
 
     var newPokemon = await axios.get(`${url}/pokemon/${name}`).then((res) => {
-      console.log(res);
       setPokemon(res);
       setSkeleton(false);
       setModalOpen(true);
