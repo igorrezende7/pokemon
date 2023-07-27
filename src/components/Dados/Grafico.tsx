@@ -13,16 +13,16 @@ import {
 import { Col, Container, Row } from "react-bootstrap";
 const Grafico = ({data}:any) => {
   
+  useEffect(()=>{
+    if(data == undefined || data ==null)
+    return
 
- 
-
- 
-
-  
-
+    console.log(data)
+  },[data])
+console.log(data)
   return (
     <>
-  
+      <h1>Olá</h1>
     </>
   );
 };

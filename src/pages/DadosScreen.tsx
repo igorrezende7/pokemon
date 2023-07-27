@@ -11,7 +11,7 @@ const DadosScreen = () => {
   const navigate = useNavigate();
   const [skeleton, setSkeleton] = useState<boolean>(false);
   const {allPokemons, count } = useSelector((root:any)=> root.pokemonsReducer)
-  const [data, setData] = useState("")
+  const [data, setData] = useState<any>("")
 
   useEffect(()=>{
     if(allPokemons == null || count ==null)
@@ -36,18 +36,24 @@ const DadosScreen = () => {
   
 
   async function getAllParams(urls:any){
-    let response = await axios.all(urls.map((url:any)=>axios.get(url)))
+    try {
+      let response = await axios.all(urls.map((url:any)=>axios.get(url)))
     return response
+    } catch (error) {
+      console.log(error)
+    }
   }
   return (
     
+        
         <>
-          <Skeleton open={skeleton} />
+        <Skeleton open={skeleton}/>
           <NavBar />
           <Shadow>
-            <Grafico data={data}></Grafico>
+            {data ? <Grafico data={data}></Grafico> : ""}
           </Shadow>
-        </>
+          </>  
+          
     
   );
 };
