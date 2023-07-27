@@ -37,7 +37,7 @@ const DadosScreen = () => {
 
   async function getAllParams(urls:any){
     try {
-      let response = await axios.all(urls.map((url:any)=>axios.get(url)))
+      let response = await axios.all(urls.map((url:string)=>axios.get(url)))
     return response
     } catch (error) {
       console.log(error)
