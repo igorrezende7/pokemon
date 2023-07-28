@@ -27,7 +27,7 @@ const CardPokemons = ({ pokemons, changeModal, getPokemon }: PokemonProps) => {
         <Row className="justify-content-md-start justify-content-center">
           {pokemons.map((pokemon: any, key: number) => (
             <Col lg={3} md={6} xs={10} className="d-flex">
-              <Card>
+              <Card hover={true}>
                 <CardImage>
                   <CardOverAll>{pokemon.data.base_experience}</CardOverAll>
                   <img src={pokemon.data.sprites.front_default} alt="" />

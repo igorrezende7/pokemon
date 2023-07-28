@@ -23,7 +23,7 @@ const ModalPokemons = ({ open, changeModal, pokemon }: ModalProps) => {
         <Modal open={open}>
           <ModalClique onClick={() => changeModal()}></ModalClique>
           <ModalContent open={open}>
-            <Card>
+            <Card hover={false}>
               <CloseModal>
                 <IoMdClose onClick={() => changeModal()} />
               </CloseModal>

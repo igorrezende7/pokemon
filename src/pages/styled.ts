@@ -4,7 +4,7 @@ export const Shadow = styled.div`
 position: relative;
 width: 80%;
 margin: 0 auto;
-
+min-height: 100vh;
 &::before{
     content: "";
     position: absolute;

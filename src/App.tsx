@@ -19,7 +19,6 @@ function App() {
 
   useEffect(() => {
       getPokemos().then((res)=>{
-        console.log(res)
         setSkeleton(false)
       })
     
@@ -39,7 +38,6 @@ function App() {
       urls.push(obj[i].url);
     }
     let response = await axios.all(urls.map((url) => axios.get(url)));
-    console.log(response)
     const resposta = response;
     setCount(count);
     dispatch({

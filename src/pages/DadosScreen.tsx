@@ -7,6 +7,8 @@ import { Shadow } from "./styled";
 import Grafico from "../components/Dados/Grafico";
 import axios, { all } from "axios";
 import PokemonsActionTypes from "../redux/pokemons/pokemonsActionType";
+import Dados from '../Services/dados'
+import dadosActionTypes from "../redux/Dados/dadosActionTypes";
 interface InfoProps{
   data:any,
   contador:number
@@ -17,33 +19,32 @@ const DadosScreen = () => {
   const {pokemons } = useSelector((root:any)=> root.pokemonsReducer)
   const [data, setData]  = useState<any>()
   const dispatch = useDispatch()
-
+  const {dados} = useSelector((root:any)=> root.dadosReducer)
   const filterData = useCallback(()=>{
-    var maisVida = {valor:0, name:"", img:""};
-    var maisForte ={valor:0, name:"", img:""};
-    var maisRapido= {valor:0, name:"", img:""};
+    var maisVida = new Dados();
+    var maisForte =new Dados();
+    var maisRapido= new Dados();
 
    if(pokemons){
-    console.log(pokemons)
     for(var i=0;i<pokemons.length;i++){
 
-      var nome = pokemons[i]
+      var nome = pokemons[i].data.name
       var image = pokemons[i].data.sprites.front_default
-      if(pokemons[i].data.stats[0].base_stat > maisVida.valor){
-        maisVida.valor = pokemons[i].data.stats[0].base_stat;
-        maisVida.name = nome
-        maisVida.img = image
+      if(pokemons[i].data.stats[0].base_stat > maisVida.dados.valor){
+        maisVida.dados.valor = pokemons[i].data.stats[0].base_stat;
+        maisVida.dados.name = nome
+        maisVida.dados.image = image
       }
-      if(pokemons[i].data.stats[1].base_stat > maisForte.valor){
-        maisForte.valor = pokemons[i].data.stats[1].base_stat;
-        maisForte.name = nome;
-        maisForte.img = image
+      if(pokemons[i].data.stats[1].base_stat > maisForte.dados.valor){
+        maisForte.dados.valor = pokemons[i].data.stats[1].base_stat;
+        maisForte.dados.name = nome;
+        maisForte.dados.image = image
       }
 
-      if(pokemons[i].data.stats[5].base_stat > maisRapido.valor){
-        maisRapido.valor = pokemons[i].data.stats[5].base_stat;
-        maisRapido.name = nome;
-        maisRapido.img = image
+      if(pokemons[i].data.stats[5].base_stat > maisRapido.dados.valor){
+        maisRapido.dados.valor = pokemons[i].data.stats[5].base_stat;
+        maisRapido.dados.name = nome;
+        maisRapido.dados.image = image
       }
     }
    }
@@ -61,13 +62,13 @@ const DadosScreen = () => {
       }
 
       dispatch({
-        type:PokemonsActionTypes.addAll,
+        type:dadosActionTypes.add,
         payload: {maisForte,maisRapido, maisVida, accumulator}
       })
       setData(accumulator)
       return accumulator
     },[])
-  },[])
+  },[pokemons])
     
   useEffect(()=>{
     if(!data){
@@ -75,16 +76,23 @@ const DadosScreen = () => {
     }
     setSkeleton(false)
     filterData()
-  },[pokemons])
+  },[filterData])
 
   return (
         <>
-        <Skeleton open={skeleton}/>
-          <NavBar />
-          <Shadow>
-            <Grafico></Grafico>
-          </Shadow>
-          </>  
+          {dados ? 
+          <>
+              <Skeleton open={skeleton}/>
+         <NavBar />
+         <Shadow>
+           <Grafico></Grafico>
+         </Shadow>
+          </>
+         
+         :
+         <Skeleton open={true}/>
+        }
+        </>  
           
     
   );

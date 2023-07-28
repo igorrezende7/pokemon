@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 import { darken } from 'polished'
 
-export const Card = styled.div`
+interface CardProps{
+  hover:boolean
+}
+
+export const Card = styled.div<CardProps>`
 
   display: flex;
   flex-direction: column;
@@ -15,9 +19,9 @@ export const Card = styled.div`
   transition: .3s;
   cursor: pointer;
   flex: 1;
-  /* &:hover{
-    transform: scale(1.05);
-  } */
+  &:hover{
+    transform: ${props => props.hover ? "scale(1.05)" : ""}
+  }
 `
 export const CardImage = styled.div`
 position: relative;
@@ -67,4 +71,9 @@ padding:.5rem;
 background-color: #2d4596;
 color: #f2f2f2;
 border-radius: 0px 0px 5px 0px;
+`
+
+
+export const CardSubTitle = styled.p`
+color: #ccc;
 `
