@@ -3,7 +3,10 @@ import PokemonsActionTypes from "./pokemonsActionType"
 const initalState = {
   pokemons: null,
   count:null,
-  allPokemons:null,
+  dados:null,
+  maisForte:null,
+  maisRapido:null,
+  maisVida:null
 }
 
 const pokemonsReducer = (state = initalState, action:any)=>{
@@ -15,7 +18,7 @@ const pokemonsReducer = (state = initalState, action:any)=>{
 
   switch(action.type){
     case PokemonsActionTypes.addAll:
-      return {...state, allPokemons:response}
+      return {...state, dados:response.accumulator, maisForte:response.maisForte, maisRapido:response.maisRapido, maisVida:response.maisVida}
   }
 
   return {...state}

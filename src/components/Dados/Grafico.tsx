@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import Skeleton from "../Skeleton/Skeleton";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   VictoryAxis,
   VictoryBar,
@@ -11,33 +11,20 @@ import {
   VictoryScatter,
 } from "victory";
 import { Col, Container, Row } from "react-bootstrap";
-const Grafico = ({data}:any) => {
-  
+
+
+const Grafico = () => {
+  const [skeleton, setSkeleton] = useState<boolean>(false)
+  const {maisVida, maisRapido, maisForte, dados} = useSelector((root:any)=> root.pokemonsReducer)
   useEffect(()=>{
-    if(data == undefined || data ==null)
-    return
-
-    if (data !== null && data !==null){
-      fiterData()
-    }
-    
-  },[data])
-
-  function fiterData(){
-    const result = data.reduce((accumulator:any , current:any )=>{
-      var tipo = current.data.types[0].type.name
-      // console.log(accumulator)
-      // const existe = accumulator.find((item:any) => item.tipo === tipo);
-      // if(existe){
-
-      // }
-    })
-  }
+    console.log(dados)
+  },[dados])
 
 
 
   return (
     <>
+    <Skeleton open={skeleton}/>
       <h1>Olá</h1>
     </>
   );

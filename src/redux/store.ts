@@ -1,7 +1,12 @@
 import {createStore} from 'redux'
 import rootReducer from './rootReducer'
+import persistConfig from './persist'
+import {persistReducer, persistStore} from 'redux-persist'
 
 
-const store = createStore(rootReducer)
+const persisteReducer = persistReducer(persistConfig, rootReducer)
 
-export default store
+const store = createStore(persisteReducer)
+const persistor = persistStore(store)
+
+export  {store, persistor}

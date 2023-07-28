@@ -16,22 +16,15 @@ const url = process.env.REACT_APP_URL_API;
 
 const NavBar = () => {
   const dispatch = useDispatch();
-  const { count, allPokemons } = useSelector(
+  const { count, allPokemons,pokemons } = useSelector(
     (root: any) => root.pokemonsReducer
   );
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [pokemon, setPokemon] = useState<any>("");
-  const [pokemons, setPokemons] = useState<any>(false);
   const [skeleton, setSkeleton] = useState<boolean>(false);
-  useEffect(() => {
-    if(allPokemons == null || allPokemons== undefined)
-    return
-    console.log(allPokemons)
-    setPokemons(allPokemons.results)
-
-  }, [allPokemons]);
-
+  
+ 
 
 
 
@@ -72,7 +65,7 @@ const NavBar = () => {
                 onChange={(e: any, newValue: any) => {
                   changePokemon(newValue);
                 }}
-                options={pokemons.map((option: any) => option.name)}
+                options={pokemons.map((option: any) => option.data.name)}
                 renderInput={(params: any) => (
                   <TextField {...params} label="Pokemons" />
                 )}
