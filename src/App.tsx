@@ -32,7 +32,7 @@ function App() {
   //Função que retorna um array com todos os nossos pokemons
   async function getPokemos() {
     let urls = [];
-    let getUrls = await axios.get(`${url}/pokemon/?offset=0&limit=60`);
+    let getUrls = await axios.get(`${url}/pokemon/?offset=0&limit=64`);
     let count = getUrls.data.count;
     let obj = getUrls.data.results;
     for (var i = 0; i < obj.length; i++) {

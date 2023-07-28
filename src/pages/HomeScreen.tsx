@@ -12,7 +12,7 @@ const HomeScreen = () => {
   const { pokemons } = useSelector((root: any) => root.pokemonsReducer);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [pokemonFiltrado, setPokemonFiltrado] = useState<any>()
-  const [itensPerPage, setItensPerPage] = useState<number>(6)
+  const [itensPerPage, setItensPerPage] = useState<number>(8)
   const [pagina, setPagina] = useState<number>(0);
   const pages = Math.ceil(pokemons.length/itensPerPage);
   const start = pagina * itensPerPage;
