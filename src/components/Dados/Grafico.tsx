@@ -10,7 +10,6 @@ const Grafico = () => {
   const [skeleton, setSkeleton] = useState(true);
   const { dados,maisVida, maisRapido, maisForte } = useSelector((root:any) => root.dadosReducer);
 
-console.log(maisForte)
   useEffect(() => {
     if (dados.length > 0) {
       setSkeleton(false); // Oculta o Skeleton quando os dados estiverem prontos
